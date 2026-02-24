@@ -1,0 +1,29 @@
+package build
+
+import mill._, scalalib._, scalalib.scalafmt._
+
+trait SharedModule extends ScalaModule, ScalafmtModule {
+  def scalaVersion = "3.8.1"
+}
+
+object app extends SharedModule {
+  def mvnDeps = Seq(
+    mvn"dev.zio::zio-prelude:1.0.0-RC46"
+  )
+
+  object test extends ScalaTests, TestModule.ZioTest {
+    def zioTestVersion = "2.1.21"
+  }
+}
+
+object cats extends SharedModule {
+  def mvnDeps = Seq(
+    mvn"org.typelevel::cats-core:2.13.0"
+  )
+
+  object test extends ScalaTests, TestModule.ScalaTest {
+    def mvnDeps = Seq(
+      mvn"org.scalatest::scalatest:3.2.19"
+    )
+  }
+}
