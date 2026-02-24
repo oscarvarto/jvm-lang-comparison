@@ -1,7 +1,7 @@
 # JVM Language Comparison: Validation with Error Accumulation
 
-A comparison of how four JVM languages implement the same domain validation logic using functional programming patterns.
-Each subproject validates a `Person` entity with three rules:
+A comparison of how five JVM/native languages implement the same domain validation logic using functional programming
+patterns. Each subproject validates a `Person` entity with three rules:
 
 1. **Name** must not be blank
 2. **Age** must not be negative
@@ -47,6 +47,7 @@ Key FP concepts at play:
 | [`kotlin-validation/`](kotlin-validation/)                                 | Kotlin   | Arrow              | Gradle                 | `Either<NonEmptyList<PersonValidationError>, Person>` |
 | [`scala-validation/`](scala-validation/)                                   | Scala 3  | ZIO Prelude        | Mill                   | `Validation[PersonValidationError, Person]`           |
 | [`clojure-validation/`](clojure-validation/)                               | Clojure  | clojure.spec.alpha | deps.edn / tools.build | `{:errors [...]}` or `{:ok {...}}`                    |
+| [`jank-validation/`](jank-validation/)                                     | jank     | (plain predicates) | Leiningen + lein-jank  | `{:errors [...]}` or `{:ok {...}}`                    |
 
 ## Running Tests
 
@@ -62,4 +63,7 @@ cd scala-validation && mill app.test
 
 # Clojure
 cd clojure-validation && clj -T:build test
+
+# jank
+cd jank-validation && lein run
 ```

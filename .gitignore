@@ -10,6 +10,14 @@
 ### Mill ###
 out/
 
+### jank ###
+a.out
+
+### Clojure / jank tooling ###
+.clj-kondo/
+.lsp/
+target/
+
 ### Created by https://www.gitignore.io
 ### Kotlin ###
 # Compiled class file

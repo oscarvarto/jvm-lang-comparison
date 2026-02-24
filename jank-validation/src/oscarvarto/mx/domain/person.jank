@@ -1,0 +1,24 @@
+(ns oscarvarto.mx.domain.person
+  (:require [clojure.string :as str]))
+
+(def max-age 130)
+
+(defn non-blank-name? [s]
+  (and (string? s) (not (str/blank? s))))
+
+(defn non-negative-age? [n]
+  (>= n 0))
+
+(defn within-max-age? [n]
+  (<= n max-age))
+
+(defn make-person
+  "Creates a person map if all validations pass, or returns accumulated error keywords."
+  [name age]
+  (let [errors (cond-> []
+                 (not (non-blank-name? name))  (conj :blank-name)
+                 (not (non-negative-age? age)) (conj :negative-age)
+                 (not (within-max-age? age))   (conj :max-age))]
+    (if (seq errors)
+      {:errors errors}
+      {:ok {:name name :age age}})))

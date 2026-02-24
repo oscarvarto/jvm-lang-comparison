@@ -1,0 +1,6 @@
+(ns jank-validation.main
+  (:require [clojure.test :refer [run-tests]]
+            [oscarvarto.mx.domain.person-test]))
+
+(defn -main [& args]
+  (run-tests 'oscarvarto.mx.domain.person-test))
