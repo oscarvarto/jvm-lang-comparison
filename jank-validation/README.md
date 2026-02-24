@@ -1,6 +1,7 @@
-# jank validation
+# Jank validation
 
-Person validation using **jank**, a Clojure dialect that compiles natively via LLVM.
+Person validation using **Jank**, a Clojure dialect that compiles natively via LLVM. **NOTE**: Jank is pretty new, and
+in heavy development.
 
 ## Approach
 
@@ -65,17 +66,14 @@ wired up in jank's alpha, the main entry point runs the tests programmatically:
 
 - **Native compilation** — jank compiles to native code via LLVM, producing executables that start instantly without JVM
   warmup.
-
 - **Clojure compatibility** — the same mental model, data structures, and idioms transfer directly from Clojure.
-
 - **C++ interop** — jank can call into C++ libraries directly, opening up system-level programming that Clojure on the JVM
   cannot easily reach.
-
 - **Simpler validation** — without spec, the predicate functions are straightforward and have no framework dependency.
 
 ## Cons
 
-- **Alpha quality** — jank 0.1-alpha probably will crash, leak, and be slow. Large areas of functionality are not yet
+- **Alpha stage** — Jank 0.1-alpha probably will crash, leak, and be slow. Large areas of functionality are not yet
   implemented.
 - **No `clojure.spec`** — spec-based validation, generative testing (`test.check`), and spec-as-documentation are
   unavailable.
