@@ -16,12 +16,10 @@ public class ValidationOps {
         return condition(c, e, t).nel();
     }
 
-    /**
-     * Joins error messages with comma separator.
-     *
-     * @param errors NonEmptyList of error messages
-     * @return Comma-separated error string
-     */
+    /// Joins error messages with comma separator.
+    ///
+    /// @param errors NonEmptyList of error messages
+    /// @return Comma-separated error string
     @SuppressWarnings({"argument", "assignment", "cast.unsafe"})
     public static @ErrorMsg String joinErrors(NonEmptyList<@ErrorMsg String> errors) {
         return (@ErrorMsg String) stringMonoid.join(errors, ", ");

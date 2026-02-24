@@ -11,32 +11,30 @@ import org.checkerframework.framework.qual.QualifierForLiterals;
 import org.checkerframework.framework.qual.SubtypeOf;
 import org.checkerframework.framework.qual.TypeUseLocation;
 
-/**
- * Denotes that a String is an error message used for error accumulation.
- *
- * <p>Use this annotation on strings that are intended to be accumulated in error-handling
- * structures like {@code NonEmptyList<@ErrorMsg String>} via semigroups.
- *
- * <p>Type hierarchy:
- *
- * <pre>
- *    @NotErrorMsg (top)
- *        |
- *    @ErrorMsg <-- THIS
- * </pre>
- *
- * <p>Example usage:
- *
- * <pre>{@code
- * // Explicitly mark error messages
- * @ErrorMsg String error = "Missing path parameter: " + paramName;
- *
- * // Accumulate errors using semigroup
- * Semigroup<NonEmptyList<@ErrorMsg String>> errorSemigroup = Semigroup.nonEmptyListSemigroup();
- * }</pre>
- *
- * @see NotErrorMsg
- */
+/// Denotes that a String is an error message used for error accumulation.
+///
+/// Use this annotation on strings that are intended to be accumulated in error-handling
+/// structures like `NonEmptyList<@ErrorMsg String>` via semigroups.
+///
+/// Type hierarchy:
+///
+/// ```
+///    @NotErrorMsg (top)
+///        |
+///    @ErrorMsg <-- THIS
+/// ```
+///
+/// Example usage:
+///
+/// ```java
+/// // Explicitly mark error messages
+/// @ErrorMsg String error = "Missing path parameter: " + paramName;
+///
+/// // Accumulate errors using semigroup
+/// Semigroup<NonEmptyList<@ErrorMsg String>> errorSemigroup = Semigroup.nonEmptyListSemigroup();
+/// ```
+///
+/// @see NotErrorMsg
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE_USE, ElementType.TYPE_PARAMETER})

@@ -1,4 +1,4 @@
-# Java is not always simpler (Java)
+# Java is not always simpler
 
 Person validation using **FunctionalJava**, **Lombok**, and the **Checker Framework** on Java 25.
 
