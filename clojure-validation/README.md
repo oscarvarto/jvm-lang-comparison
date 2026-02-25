@@ -36,6 +36,65 @@ The return value is a plain map — `{:ok {:name "Alice" :age 30}}` on success, 
 on failure. No wrapper types, no generics, no sealed hierarchies. Error "types" are keywords, which are interned,
 self-describing, and namespace-qualified when needed.
 
+### Line-by-line walkthrough (`src/oscarvarto/mx/domain/person.clj`)
+
+The source file has 21 lines. This section explains what each line does in plain language.
+
+Line 1 is `(ns oscarvarto.mx.domain.person`. It starts the namespace declaration. A namespace is similar to a module or
+package name, so everything in this file belongs to `oscarvarto.mx.domain.person`.
+
+Line 2 is `(:require [clojure.spec.alpha :as s]`. It begins the dependency list and imports Clojure Spec with the alias
+`s`, which is why the file can call `s/def` and `s/valid?`.
+
+Line 3 is `[clojure.string :as str]))`. It imports `clojure.string` as `str`. The closing `))` ends both the `:require`
+form and the `ns` form started above.
+
+Line 5 is `(def max-age 130)`. It defines a top-level var named `max-age` with value `130`, so the upper age limit is
+centralized in one place.
+
+Line 7 is `;; Individual validation specs`. This is a comment; `;;` means Clojure ignores it at runtime.
+
+Line 8 is `(s/def ::non-blank-name (s/and string? (complement str/blank?)))`. It defines a spec called
+`::non-blank-name`. The rule is: value must be a string and must not be blank. `complement` negates `str/blank?`, and
+`::` creates a namespaced keyword tied to this namespace.
+
+Line 9 is `(s/def ::non-negative-age #(>= % 0))`. It defines `::non-negative-age`. The `#(...)` syntax creates an
+anonymous function; `%` is its argument. The check enforces age greater than or equal to zero.
+
+Line 10 is `(s/def ::within-max-age #(<= % max-age))`. It defines `::within-max-age`, enforcing age less than or equal
+to `max-age` (130).
+
+Line 12 is `(defn make-person`. It starts defining the function named `make-person`.
+
+Line 13 is the docstring: `"Creates a person map if all validations pass, or returns accumulated error keywords."` This
+text documents the function and is visible in REPL help.
+
+Line 14 is `[name age]`. It declares the function parameters: `name` and `age`.
+
+Line 15 is `(let [errors (cond-> []`. It creates a local binding `errors`, starting from an empty vector `[]`, then uses
+`cond->` to conditionally transform it.
+
+Line 16 is `(not (s/valid? ::non-blank-name name)) (conj :blank-name)`. If `name` fails the non-blank-name spec,
+`cond->` applies `(conj :blank-name)` and adds `:blank-name` to the error vector.
+
+Line 17 is `(not (s/valid? ::non-negative-age age)) (conj :negative-age)`. If age is negative, it appends
+`:negative-age`.
+
+Line 18 is `(not (s/valid? ::within-max-age age)) (conj :max-age))]`. If age is above `max-age`, it appends `:max-age`.
+The trailing `)]` closes the `cond->` expression and the `let` binding vector.
+
+Line 19 is `(if (seq errors)`. It checks whether any errors were collected. `seq` returns a truthy value for non-empty
+collections and `nil` for empty ones.
+
+Line 20 is `{:errors errors}`. If errors exist, the function returns a map containing an `:errors` key and the vector of
+error keywords.
+
+Line 21 is `{:ok {:name name :age age}})))`. If there are no errors, the function returns success data under `:ok`,
+including a nested map with `:name` and `:age`. The final `)))` closes `if`, `let`, and `defn`.
+
+In short: `make-person` always returns plain data, either a success map (`:ok`) or an error map (`:errors`), never
+exceptions for validation failures.
+
 ### Development workflow
 
 Clojure's interactive nature shines with **Emacs + CIDER**. The `deps.edn` includes a `:cider-clj` alias for launching
