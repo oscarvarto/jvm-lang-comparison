@@ -1,13 +1,5 @@
-import java.io.File
-import javax.xml.parsers.DocumentBuilderFactory
-import org.gradle.api.Project
-
-import org.gradle.util.GradleVersion.version
-import org.w3c.dom.Element
-
 plugins {
   id("java-library")
-  id("maven-publish")
   alias(libs.plugins.spotless)
   alias(libs.plugins.checkerFramework)
 }
@@ -129,8 +121,7 @@ spotless {
   java {
     toggleOffOn()
     encoding("UTF-8")
-    palantirJavaFormat().apply {
-      version(libs.versions.palantirJavaFormat.get())
+    palantirJavaFormat(libs.versions.palantirJavaFormat.get()).apply {
       style("PALANTIR")
       formatJavadoc(false)
     }
