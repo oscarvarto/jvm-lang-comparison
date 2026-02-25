@@ -43,9 +43,9 @@ The `@ErrorMsg` / `@NotErrorMsg` annotations form a two-level subtyping hierarch
 
 ```mermaid
 graph BT
-    ErrorMsg["@ErrorMsg\nsubtype — only string literals\nand explicitly annotated values"]
-    NotErrorMsg["@NotErrorMsg\ntop, default for unannotated strings"]
-    ErrorMsg --> NotErrorMsg
+    ErrorMsg["@ErrorMsg — subtype"]
+    NotErrorMsg["@NotErrorMsg — top, default"]
+    ErrorMsg -->|"subtype of"| NotErrorMsg
 ```
 
 This prevents accidentally passing an arbitrary `String` where an error message is expected, approximating a
@@ -155,12 +155,11 @@ use them.
 flowchart LR
     subgraph Problem["Chicken-and-egg problem"]
         direction LR
-        SRC["Source tree\n@ErrorMsg definitions +\ncode that uses @ErrorMsg"]
+        SRC["Source tree: @ErrorMsg defs + code that uses them"]
         JAVAC["javac + SubtypingChecker"]
         SRC --> JAVAC
-        JAVAC -. "checker needs compiled\n@ErrorMsg.class to run" .-> SRC
+        JAVAC -. "needs compiled @ErrorMsg.class to run" .-> SRC
     end
-    style Problem fill:#fee,stroke:#c33
 ```
 
 The solution is a two-phase compilation:
@@ -345,15 +344,15 @@ The full compilation pipeline for a `./gradlew build`:
 ```mermaid
 flowchart TD
     subgraph Phase1["Phase 1 — compileQualifiers"]
-        Q_IN["src/**/qual/*.java\n@ErrorMsg, @NotErrorMsg"]
-        Q_JAVAC["javac  -proc:none"]
+        Q_IN["src/**/qual/*.java"]
+        Q_JAVAC["javac -proc:none"]
         Q_OUT["build/qualifiers-classes/"]
         Q_IN --> Q_JAVAC --> Q_OUT
     end
 
     subgraph Phase2["Phase 2 — compileJava"]
         M_IN["src/main/java/**/*.java"]
-        M_JAVAC["javac forked JVM\n--sun-misc-unsafe-memory-access=allow"]
+        M_JAVAC["javac, forked JVM"]
         M_OUT["build/classes/java/main/"]
         M_IN --> M_JAVAC --> M_OUT
     end
@@ -364,18 +363,18 @@ flowchart TD
         NULLNESS["NullnessChecker"]
     end
 
-    Q_OUT -- "classpath +\nprocessorpath" --> M_JAVAC
-    Processors -. "run inside\nPhase 2" .-> M_JAVAC
+    Q_OUT -- "classpath + processorpath" --> M_JAVAC
+    Processors -. "run inside Phase 2" .-> M_JAVAC
 
     subgraph Phase3["Phase 3 — compileTestJava"]
         T_IN["src/test/java/**/*.java"]
-        T_JAVAC["javac forked JVM\nsame flags as Phase 2"]
+        T_JAVAC["javac, forked JVM, same flags"]
         T_OUT["build/classes/java/test/"]
         T_IN --> T_JAVAC --> T_OUT
     end
 
     M_OUT -- classpath --> T_JAVAC
-    Q_OUT -- "classpath +\nprocessorpath" --> T_JAVAC
+    Q_OUT -- "classpath + processorpath" --> T_JAVAC
 ```
 
 ## Pros
