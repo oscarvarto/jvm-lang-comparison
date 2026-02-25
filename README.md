@@ -41,7 +41,7 @@ Key FP concepts at play:
 
 ## Subprojects
 
-| Directory                                                                  | Language | FP Library         | Build System           | Error Type                                            |
+| Directory                                                                  | Language | FP Library         | Build System           | Return type/value                                     |
 |----------------------------------------------------------------------------|----------|--------------------|------------------------|-------------------------------------------------------|
 | [`traditional-is-not-always-simpler/`](traditional-is-not-always-simpler/) | Java 25  | FunctionalJava     | Gradle                 | `Validation<NonEmptyList<@ErrorMsg String>, Person>`  |
 | [`kotlin-validation/`](kotlin-validation/)                                 | Kotlin   | Arrow              | Gradle                 | `Either<NonEmptyList<PersonValidationError>, Person>` |
@@ -59,7 +59,9 @@ cd traditional-is-not-always-simpler && ./gradlew test
 cd kotlin-validation && ./gradlew test
 
 # Scala
-cd scala-validation && mill app.test
+cd scala-validation
+mill app.test   # Testing ZIO version
+mill cats.test  # Testing Cats version
 
 # Clojure
 cd clojure-validation && clj -T:build test
