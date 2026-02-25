@@ -5,9 +5,9 @@ in heavy development.
 
 ## Approach
 
-jank is a general-purpose programming language that brings Clojure's semantics to native compilation through C++ codegen
-and LLVM JIT. Since jank is a Clojure dialect, the validation logic is nearly identical to the Clojure implementation
-but with one key difference: `clojure.spec.alpha` is not available in jank's alpha release, so validation predicates are
+Jank is a general-purpose programming language that brings Clojure's semantics to native compilation through C++ codegen
+and LLVM JIT. Since Jank is a Clojure dialect, the validation logic is nearly identical to the Clojure implementation
+but with one key difference: `clojure.spec.alpha` is not available in Jank's alpha release, so validation predicates are
 defined as plain functions instead of specs.
 
 ### Validation logic
@@ -41,7 +41,7 @@ using `cond->` — the same pattern as the Clojure version:
 
 ### Differences from the Clojure version
 
-| Aspect           | Clojure                                          | jank                                  |
+| Aspect           | Clojure                                          | Jank                                  |
 |------------------|--------------------------------------------------|---------------------------------------|
 | Validation rules | `clojure.spec.alpha` specs (`s/def`, `s/valid?`) | Plain predicate functions             |
 | File extension   | `.clj`                                           | `.jank`                               |
@@ -54,8 +54,8 @@ structural difference is replacing spec predicates with regular functions, which
 
 ### Testing
 
-jank ships its own `clojure.test` implementation with `deftest`, `is`, and `run-tests`. Since `lein test` is not yet
-wired up in jank's alpha, the main entry point runs the tests programmatically:
+Jank ships its own `clojure.test` implementation with `deftest`, `is`, and `run-tests`. Since `lein test` is not yet
+wired up Jank's alpha, the main entry point runs the tests programmatically:
 
 ```clojure
 (defn -main [& args]
@@ -64,10 +64,10 @@ wired up in jank's alpha, the main entry point runs the tests programmatically:
 
 ## Pros
 
-- **Native compilation** — jank compiles to native code via LLVM, producing executables that start instantly without JVM
+- **Native compilation** — Jank compiles to native code via LLVM, producing executables that start instantly without JVM
   warmup.
 - **Clojure compatibility** — the same mental model, data structures, and idioms transfer directly from Clojure.
-- **C++ interop** — jank can call into C++ libraries directly, opening up system-level programming that Clojure on the JVM
+- **C++ interop** — Jank can call into C++ libraries directly, opening up system-level programming that Clojure on the JVM
   cannot easily reach.
 - **Simpler validation** — without spec, the predicate functions are straightforward and have no framework dependency.
 
@@ -92,7 +92,7 @@ lein run
 
 | Component      | Version    | Role                               |
 |----------------|------------|------------------------------------|
-| jank           | 0.1-alpha  | Language and compiler              |
-| lein-jank      | 0.5        | Leiningen plugin for jank projects |
+| Jank           | 0.1-alpha  | Language and compiler              |
+| lein-jank      | 0.5        | Leiningen plugin for Jank projects |
 | clojure.string | (built-in) | `blank?` for name validation       |
 | clojure.test   | (built-in) | `deftest`, `is`, `run-tests`       |
