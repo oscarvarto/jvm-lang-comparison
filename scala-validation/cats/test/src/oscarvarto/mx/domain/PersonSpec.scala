@@ -2,6 +2,7 @@ package oscarvarto.mx.domain
 
 import cats.data.NonEmptyChain
 import org.scalatest.funsuite.AnyFunSuite
+import PersonValidationError.*
 
 class PersonSpec extends AnyFunSuite:
 

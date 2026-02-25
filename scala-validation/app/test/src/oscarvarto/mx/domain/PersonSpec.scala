@@ -3,6 +3,7 @@ package oscarvarto.mx.domain
 import zio.NonEmptyChunk
 import zio.test.*
 import zio.prelude.Validation
+import PersonValidationError.*
 
 object PersonSpec extends ZIOSpecDefault:
 

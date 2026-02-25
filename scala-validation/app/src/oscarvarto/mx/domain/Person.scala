@@ -1,11 +1,10 @@
 package oscarvarto.mx.domain
 
 import zio.prelude.Validation
+import PersonValidationError.*
 
-sealed trait PersonValidationError
-case object BlankName   extends PersonValidationError
-case object NegativeAge extends PersonValidationError
-case object MaxAge      extends PersonValidationError
+enum PersonValidationError:
+  case BlankName, NegativeAge, MaxAge
 
 final case class Person private (name: String, age: Int)
 

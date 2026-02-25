@@ -3,7 +3,7 @@ package build
 import mill._, scalalib._, scalalib.scalafmt._
 
 trait SharedModule extends ScalaModule, ScalafmtModule {
-  def scalaVersion = "3.8.1"
+  def scalaVersion = "3.8.2"
 }
 
 object app extends SharedModule {
