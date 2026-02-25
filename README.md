@@ -1,14 +1,15 @@
 # JVM Language Comparison: Validation with Error Accumulation
 
-A comparison of how five JVM/native languages implement the same domain validation logic using functional programming
-patterns. Each subproject validates a `Person` entity with three rules:
+A comparison of how different JVM/native languages and approaches implement the same domain validation logic. Each
+subproject validates a `Person` entity with three rules:
 
 1. **Name** must not be blank
 2. **Age** must not be negative
 3. **Age** must not exceed `MAX_AGE` (130)
 
-All implementations share the same core requirement: when multiple rules fail, **all** errors must be reported at once
-(error accumulation), not just the first one found (fail-fast).
+Most implementations share a core requirement: when multiple rules fail, **all** errors must be reported at once (error
+accumulation), not just the first one found (fail-fast). The `simple-java` subproject deliberately uses fail-fast
+validation to serve as a baseline showing the idiomatic Java approach without any FP machinery.
 
 ## The Validation Pattern
 
@@ -41,18 +42,26 @@ Key FP concepts at play:
 
 ## Subprojects
 
-| Directory                                                                  | Language | FP Library         | Build System           | Return type/value                                     |
-|----------------------------------------------------------------------------|----------|--------------------|------------------------|-------------------------------------------------------|
-| [`traditional-is-not-always-simpler/`](traditional-is-not-always-simpler/) | Java 25  | FunctionalJava     | Gradle                 | `Validation<NonEmptyList<@ErrorMsg String>, Person>`  |
-| [`kotlin-validation/`](kotlin-validation/)                                 | Kotlin   | Arrow              | Gradle                 | `Either<NonEmptyList<PersonValidationError>, Person>` |
-| [`scala-validation/`](scala-validation/)                                   | Scala 3  | ZIO Prelude        | Mill                   | `Validation[PersonValidationError, Person]`           |
-| [`clojure-validation/`](clojure-validation/)                               | Clojure  | clojure.spec.alpha | deps.edn / tools.build | `{:errors [...]}` or `{:ok {...}}`                    |
-| [`jank-validation/`](jank-validation/)                                     | jank     | (plain predicates) | Leiningen + lein-jank  | `{:errors [...]}` or `{:ok {...}}`                    |
+| Directory                                                                  | Language | FP Library         | Build System           | Error Strategy | Return type/value                                     |
+|----------------------------------------------------------------------------|----------|--------------------|------------------------|----------------|-------------------------------------------------------|
+| [`simple-java/`](simple-java/)                                             | Java 17  | —                  | Maven                  | Fail-fast      | `Person` or throws `IllegalArgumentException`         |
+| [`java-no-lombok/`](java-no-lombok/)                                       | Java 25  | FunctionalJava     | Gradle                 | Accumulating   | `Validation<NonEmptyList<@ErrorMsg String>, Person>`  |
+| [`traditional-is-not-always-simpler/`](traditional-is-not-always-simpler/) | Java 25  | FunctionalJava     | Gradle                 | Accumulating   | `Validation<NonEmptyList<@ErrorMsg String>, Person>`  |
+| [`kotlin-validation/`](kotlin-validation/)                                 | Kotlin   | Arrow              | Gradle                 | Accumulating   | `Either<NonEmptyList<PersonValidationError>, Person>` |
+| [`scala-validation/`](scala-validation/)                                   | Scala 3  | ZIO Prelude        | Mill                   | Accumulating   | `Validation[PersonValidationError, Person]`           |
+| [`clojure-validation/`](clojure-validation/)                               | Clojure  | clojure.spec.alpha | deps.edn / tools.build | Accumulating   | `{:errors [...]}` or `{:ok {...}}`                    |
+| [`jank-validation/`](jank-validation/)                                     | jank     | (plain predicates) | Leiningen + lein-jank  | Accumulating   | `{:errors [...]}` or `{:ok {...}}`                    |
 
 ## Running Tests
 
 ```bash
-# Java
+# Simple Java (Maven, fail-fast)
+cd simple-java && mvn test
+
+# Java without Lombok (Gradle, error accumulation)
+cd java-no-lombok && ./gradlew test
+
+# Java with Lombok + Checker Framework (Gradle, error accumulation)
 cd traditional-is-not-always-simpler && ./gradlew test
 
 # Kotlin
