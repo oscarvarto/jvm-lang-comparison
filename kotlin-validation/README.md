@@ -69,7 +69,7 @@ Person("Alice", 30).shouldBeRight()
 ## Key Dependencies
 
 | Library    | Version | Role                                                 |
-|------------|---------|------------------------------------------------------|
+| ---------- | ------- | ---------------------------------------------------- |
 | Arrow Core | 2.2.1.1 | `Either`, `NonEmptyList`, `Raise`, `zipOrAccumulate` |
 | Kotest     | 6.1.3   | Test runner + Arrow assertion matchers               |
 | Kotlin     | 2.3.10  | Language (JVM toolchain targeting JDK 25)            |

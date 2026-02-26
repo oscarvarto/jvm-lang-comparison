@@ -448,3 +448,6 @@ fabric.properties
 
 !.idea/codeStyles
 !.idea/runConfigurations
+
+.claude/
+.ruff_cache/

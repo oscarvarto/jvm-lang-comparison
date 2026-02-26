@@ -36,7 +36,7 @@ read this without knowing any library or framework.
 ### What is different from the other Java subprojects
 
 | Aspect              | `traditional-is-not-always-simpler` | `java-no-lombok`         | `simple-java`         |
-|---------------------|-------------------------------------|--------------------------|-----------------------|
+| ------------------- | ----------------------------------- | ------------------------ | --------------------- |
 | Java version        | 25                                  | 25                       | 17 (LTS)              |
 | Build system        | Gradle (Kotlin DSL)                 | Gradle (Kotlin DSL)      | Maven                 |
 | Build file size     | 146 lines                           | 105 lines                | 57 lines              |
@@ -84,9 +84,9 @@ mvn test
 
 ## Key Dependencies
 
-| Library          | Version | Role           |
-|------------------|---------|----------------|
-| TestNG           | 7.12.0  | Test framework |
-| AssertJ          | 3.27.7  | Test assertions|
-| Java             | 17      | Language (LTS) |
-| Maven            | 3.9+    | Build system   |
+| Library | Version | Role            |
+| ------- | ------- | --------------- |
+| TestNG  | 7.12.0  | Test framework  |
+| AssertJ | 3.27.7  | Test assertions |
+| Java    | 17      | Language (LTS)  |
+| Maven   | 3.9+    | Build system    |

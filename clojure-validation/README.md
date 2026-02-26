@@ -140,7 +140,7 @@ clj -T:build test
 ## Key Dependencies
 
 | Library            | Version   | Role                                        |
-|--------------------|-----------|---------------------------------------------|
+| ------------------ | --------- | ------------------------------------------- |
 | Clojure            | 1.12.4    | Language (includes clojure.spec.alpha)      |
 | clojure.spec.alpha | (bundled) | Spec predicates for validation rules        |
 | CIDER nREPL        | 0.58.0    | Emacs REPL middleware                       |

@@ -405,7 +405,7 @@ flowchart TD
 ## Key Dependencies
 
 | Library             | Version         | Role                                        |
-|---------------------|-----------------|---------------------------------------------|
+| ------------------- | --------------- | ------------------------------------------- |
 | FunctionalJava      | 5.0             | `Validation`, `NonEmptyList`, `Semigroup`   |
 | Lombok              | 1.18.42         | `@Value` for data classes                   |
 | Checker Framework   | 3.53.1          | `@ErrorMsg` type alias via SubtypingChecker |

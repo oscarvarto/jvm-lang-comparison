@@ -32,7 +32,7 @@ validate(name, age):
 Key FP concepts at play:
 
 | Concept                                | Role                                                                              |
-|----------------------------------------|-----------------------------------------------------------------------------------|
+| -------------------------------------- | --------------------------------------------------------------------------------- |
 | **Sum type** (sealed hierarchy)        | Represents the disjoint set of possible validation errors                         |
 | **Product type** (data class / record) | The `Person` entity itself                                                        |
 | **Validation / Either**                | A bifunctor holding either accumulated errors or a success value                  |
@@ -43,7 +43,7 @@ Key FP concepts at play:
 ## Subprojects
 
 | Directory                                                                  | Language | FP Library         | Build System           | Error Strategy | Return type/value                                     |
-|----------------------------------------------------------------------------|----------|--------------------|------------------------|----------------|-------------------------------------------------------|
+| -------------------------------------------------------------------------- | -------- | ------------------ | ---------------------- | -------------- | ----------------------------------------------------- |
 | [`simple-java/`](simple-java/)                                             | Java 17  | —                  | Maven                  | Fail-fast      | `Person` or throws `IllegalArgumentException`         |
 | [`java-no-lombok/`](java-no-lombok/)                                       | Java 25  | FunctionalJava     | Gradle                 | Accumulating   | `Validation<NonEmptyList<@ErrorMsg String>, Person>`  |
 | [`traditional-is-not-always-simpler/`](traditional-is-not-always-simpler/) | Java 25  | FunctionalJava     | Gradle                 | Accumulating   | `Validation<NonEmptyList<@ErrorMsg String>, Person>`  |

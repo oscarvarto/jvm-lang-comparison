@@ -78,7 +78,7 @@ Spotless) remains — that complexity is intrinsic to using custom SubtypingChec
 ## Key Dependencies
 
 | Library             | Version         | Role                                        |
-|---------------------|-----------------|---------------------------------------------|
+| ------------------- | --------------- | ------------------------------------------- |
 | FunctionalJava      | 5.0             | `Validation`, `NonEmptyList`, `Semigroup`   |
 | Checker Framework   | 3.53.1          | `@ErrorMsg` type alias via SubtypingChecker |
 | Spotless + Palantir | 8.2.1 / 2.88.0  | Code formatting                             |

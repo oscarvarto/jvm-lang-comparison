@@ -42,7 +42,7 @@ using `cond->` — the same pattern as the Clojure version:
 ### Differences from the Clojure version
 
 | Aspect           | Clojure                                          | Jank                                  |
-|------------------|--------------------------------------------------|---------------------------------------|
+| ---------------- | ------------------------------------------------ | ------------------------------------- |
 | Validation rules | `clojure.spec.alpha` specs (`s/def`, `s/valid?`) | Plain predicate functions             |
 | File extension   | `.clj`                                           | `.jank`                               |
 | Runtime          | JVM (HotSpot)                                    | Native (LLVM JIT / AOT)               |
@@ -91,7 +91,7 @@ lein run
 ## Key Dependencies
 
 | Component      | Version    | Role                               |
-|----------------|------------|------------------------------------|
+| -------------- | ---------- | ---------------------------------- |
 | Jank           | 0.1-alpha  | Language and compiler              |
 | lein-jank      | 0.5        | Leiningen plugin for Jank projects |
 | clojure.string | (built-in) | `blank?` for name validation       |

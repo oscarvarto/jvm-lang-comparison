@@ -74,7 +74,7 @@ errors via `NonEmptyChain`'s `Semigroup`.
 ## ZIO Prelude vs Cats comparison
 
 | Aspect                  | ZIO Prelude                               | Cats                                      |
-|-------------------------|-------------------------------------------|-------------------------------------------|
+| ----------------------- | ----------------------------------------- | ----------------------------------------- |
 | Error accumulation type | `Validation[E, A]` with `NonEmptyChunk`   | `ValidatedNec[E, A]` with `NonEmptyChain` |
 | Combining validations   | `Validation.validateWith(v1, v2, v3)(f)`  | `(v1, v2, v3).mapN(f)`                    |
 | Creating successes      | `Validation.succeed(x)`                   | `x.validNec`                              |
@@ -129,7 +129,7 @@ mill cats.test    # Cats tests
 ## Key Dependencies
 
 | Library     | Version    | Module | Role                                            |
-|-------------|------------|--------|-------------------------------------------------|
+| ----------- | ---------- | ------ | ----------------------------------------------- |
 | ZIO Prelude | 1.0.0-RC46 | `app`  | `Validation`, `NonEmptyChunk`                   |
 | ZIO Test    | 2.1.21     | `app`  | Test framework (`ZIOSpecDefault`, `assertTrue`) |
 | Cats Core   | 2.13.0     | `cats` | `ValidatedNec`, `mapN`, applicative syntax      |
