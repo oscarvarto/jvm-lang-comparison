@@ -103,7 +103,7 @@ factory.
 
 ## Pros
 
-- **Powerful type system** — sealed traits with case objects provide exhaustive pattern matching. Generic types,
+- **Powerful type system** — sealed traits with case objects/enums provide exhaustive pattern matching. Generic types,
   higher-kinded types, and variance annotations (`+E`, `+A`) are first-class citizens.
 - **Minimal boilerplate** — Scala 3's significant indentation, `case object`, and `case class` keep the implementation
   very compact.  
